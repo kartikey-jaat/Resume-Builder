@@ -1,45 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resume Builder</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Builder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>📝 Resume Builder</h1>
-      <div class="actions">
-        <button onclick="toggleTheme()">🌙 Theme</button>
-        <button onclick="saveData()">💾 Save</button>
-        <button onclick="loadData()">📂 Load</button>
-      </div>
-    </header>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-file-alt"></i>
+                <h1>Professional Resume Builder</h1>
+            </div>
+            <div class="actions">
+                <button class="btn btn-outline" id="themeToggle">
+                    <i class="fas fa-moon"></i> Dark Mode
+                </button>
+                <button class="btn btn-outline" id="saveData">
+                    <i class="fas fa-save"></i> Save
+                </button>
+                <button class="btn btn-outline" id="loadData">
+                    <i class="fas fa-folder-open"></i> Load
+                </button>
+                <button class="btn btn-outline" id="resetForm">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+        </header>
 
-    <form id="resumeForm">
-      <div class="grid">
-        <input type="text" id="name" placeholder="Full Name" required />
-        <input type="text" id="email" placeholder="Email" required />
-        <input type="text" id="phone" placeholder="Phone" required />
-        <input type="text" id="linkedin" placeholder="LinkedIn URL" />
-        <input type="text" id="github" placeholder="GitHub URL" />
-      </div>
-      <textarea id="summary" placeholder="Professional Summary"></textarea>
-      <textarea id="projects" placeholder="Projects (Title | Tech | Date | Description...)"></textarea>
-      <textarea id="experience" placeholder="Experience (Company | Role | Dates | Responsibilities...)"></textarea>
-      <textarea id="certifications" placeholder="Certifications (Name | Date | Provider | Link)"></textarea>
-      <textarea id="skills" placeholder="Skills (comma-separated)"></textarea>
-      <textarea id="education" placeholder="Education (School | Years | Grade | Location)"></textarea>
-      <button type="submit" class="primary">Generate Resume</button>
-    </form>
+        <div class="content-wrapper">
+            <div class="form-section">
+                <form id="resumeForm">
+                    <!-- Personal Info -->
+                    <div class="panel">
+                        <div class="panel-header"><i class="fas fa-user"></i> Personal Information</div>
+                        <div class="panel-body">
+                            <div class="grid">
+                                <input type="text" id="name" class="form-control" placeholder="Full Name" required>
+                                <input type="text" id="email" class="form-control" placeholder="Email" required>
+                                <input type="text" id="phone" class="form-control" placeholder="Phone" required>
+                                <input type="text" id="linkedin" class="form-control" placeholder="LinkedIn URL">
+                                <input type="text" id="github" class="form-control" placeholder="GitHub URL">
+                            </div>
+                        </div>
+                    </div>
 
-    <div id="resumeOutput" class="resume-box"></div>
-    <button onclick="downloadPDF()" class="primary">⬇ Download as PDF</button>
-  </div>
+                    <!-- Sections -->
+                    <div class="panel"><div class="panel-header"><i class="fas fa-file-alt"></i> Professional Summary</div><div class="panel-body"><div class="form-group"><textarea id="summary" class="form-control" placeholder="Professional Summary"></textarea></div></div></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-  <script src="script.js"></script>
+                    <div class="panel"><div class="panel-header"><i class="fas fa-briefcase"></i> Work Experience</div><div class="panel-body"><div class="form-group"><textarea id="experience" class="form-control" placeholder="Experience (Company | Role | Dates | Responsibilities...)"></textarea><div class="hint">Example: Google | Software Engineer | Jan 2020 - Present | Developed web applications...</div></div></div></div>
+
+                    <div class="panel"><div class="panel-header"><i class="fas fa-project-diagram"></i> Projects</div><div class="panel-body"><div class="form-group"><textarea id="projects" class="form-control" placeholder="Projects (Title | Tech | Date | Description...)"></textarea><div class="hint">Example: E-commerce Platform | React, Node.js | 2022 | Developed a full-stack application...</div></div></div></div>
+
+                    <div class="panel"><div class="panel-header"><i class="fas fa-certificate"></i> Certifications</div><div class="panel-body"><div class="form-group"><textarea id="certifications" class="form-control" placeholder="Certifications (Name | Date | Provider | Link)"></textarea><div class="hint">Example: AWS Certified Developer | Jun 2021 | Amazon Web Services | aws.link/cert</div></div></div></div>
+
+                    <div class="panel"><div class="panel-header"><i class="fas fa-code"></i> Skills</div><div class="panel-body"><div class="form-group"><textarea id="skills" class="form-control" placeholder="Skills (comma-separated)"></textarea><div class="hint">Example: JavaScript, React, Node.js, Python, SQL</div></div></div></div>
+
+                    <div class="panel"><div class="panel-header"><i class="fas fa-graduation-cap"></i> Education</div><div class="panel-body"><div class="form-group"><textarea id="education" class="form-control" placeholder="Education (School | Years | Grade | Location)"></textarea><div class="hint">Example: MIT | 2016-2020 | Bachelor of Science | Cambridge, MA</div></div></div></div>
+
+                    <button id="generateResume" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-sync-alt"></i> Generate Resume
+                    </button>
+                </form>
+            </div>
+
+            <div class="preview-section">
+                <div class="panel">
+                    <div class="panel-header"><i class="fas fa-eye"></i> Resume Preview</div>
+                    <div class="panel-body">
+                        <div id="resumeOutput" class="resume-preview">
+                            <div class="empty-state">
+                                <i class="fas fa-file-alt"></i>
+                                <h3>Your Resume Preview</h3>
+                                <p>Fill out the form and click "Generate Resume" to see your professional resume here</p>
+                            </div>
+                        </div>
+
+                        <div class="formats">
+                            <button id="downloadPDF" class="btn btn-primary format-btn">
+                                <i class="fas fa-file-pdf"></i> Download PDF
+                            </button>
+                            <button id="printResume" class="btn btn-outline format-btn">
+                                <i class="fas fa-print"></i> Print
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">Resume saved successfully!</div>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

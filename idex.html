@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Builder</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📝 Resume Builder</h1>
+      <div class="actions">
+        <button onclick="toggleTheme()">🌙 Theme</button>
+        <button onclick="saveData()">💾 Save</button>
+        <button onclick="loadData()">📂 Load</button>
+      </div>
+    </header>
+
+    <form id="resumeForm">
+      <div class="grid">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="text" id="email" placeholder="Email" required />
+        <input type="text" id="phone" placeholder="Phone" required />
+        <input type="text" id="linkedin" placeholder="LinkedIn URL" />
+        <input type="text" id="github" placeholder="GitHub URL" />
+      </div>
+      <textarea id="summary" placeholder="Professional Summary"></textarea>
+      <textarea id="projects" placeholder="Projects (Title | Tech | Date | Description...)"></textarea>
+      <textarea id="experience" placeholder="Experience (Company | Role | Dates | Responsibilities...)"></textarea>
+      <textarea id="certifications" placeholder="Certifications (Name | Date | Provider | Link)"></textarea>
+      <textarea id="skills" placeholder="Skills (comma-separated)"></textarea>
+      <textarea id="education" placeholder="Education (School | Years | Grade | Location)"></textarea>
+      <button type="submit" class="primary">Generate Resume</button>
+    </form>
+
+    <div id="resumeOutput" class="resume-box"></div>
+    <button onclick="downloadPDF()" class="primary">⬇ Download as PDF</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

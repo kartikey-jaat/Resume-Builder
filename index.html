@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="progress-bar"></div>
     <div class="container">
         <header>
             <div class="logo">
@@ -48,17 +49,64 @@
                     </div>
 
                     <!-- Sections -->
-                    <div class="panel"><div class="panel-header"><i class="fas fa-file-alt"></i> Professional Summary</div><div class="panel-body"><div class="form-group"><textarea id="summary" class="form-control" placeholder="Professional Summary"></textarea></div></div></div>
+                    <div class="panel">
+                        <div class="panel-header"><i class="fas fa-file-alt"></i> Professional Summary</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea id="summary" class="form-control" placeholder="Professional Summary"></textarea>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="panel"><div class="panel-header"><i class="fas fa-briefcase"></i> Work Experience</div><div class="panel-body"><div class="form-group"><textarea id="experience" class="form-control" placeholder="Experience (Company | Role | Dates | Responsibilities...)"></textarea><div class="hint">Example: Google | Software Engineer | Jan 2020 - Present | Developed web applications...</div></div></div></div>
+                    <div class="panel">
+                        <div class="panel-header"><i class="fas fa-briefcase"></i> Work Experience</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea id="experience" class="form-control" placeholder="Experience (Company | Role | Dates | Responsibilities...)"></textarea>
+                                <div class="hint">Example: Google | Software Engineer | Jan 2020 - Present | Developed web applications...</div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="panel"><div class="panel-header"><i class="fas fa-project-diagram"></i> Projects</div><div class="panel-body"><div class="form-group"><textarea id="projects" class="form-control" placeholder="Projects (Title | Tech | Date | Description...)"></textarea><div class="hint">Example: E-commerce Platform | React, Node.js | 2022 | Developed a full-stack application...</div></div></div></div>
+                    <div class="panel">
+                        <div class="panel-header"><i class="fas fa-project-diagram"></i> Projects</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea id="projects" class="form-control" placeholder="Projects (Title | Tech | Date | Description...)"></textarea>
+                                <div class="hint">Example: E-commerce Platform | React, Node.js | 2022 | Developed a full-stack application...</div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="panel"><div class="panel-header"><i class="fas fa-certificate"></i> Certifications</div><div class="panel-body"><div class="form-group"><textarea id="certifications" class="form-control" placeholder="Certifications (Name | Date | Provider | Link)"></textarea><div class="hint">Example: AWS Certified Developer | Jun 2021 | Amazon Web Services | aws.link/cert</div></div></div></div>
+                    <div class="panel">
+                        <div class="panel-header"><i class="fas fa-certificate"></i> Certifications</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea id="certifications" class="form-control" placeholder="Certifications (Name | Date | Provider | Link)"></textarea>
+                                <div class="hint">Example: AWS Certified Developer | Jun 2021 | Amazon Web Services | aws.link/cert</div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="panel"><div class="panel-header"><i class="fas fa-code"></i> Skills</div><div class="panel-body"><div class="form-group"><textarea id="skills" class="form-control" placeholder="Skills (comma-separated)"></textarea><div class="hint">Example: JavaScript, React, Node.js, Python, SQL</div></div></div></div>
+                    <div class="panel">
+                        <div class="panel-header"><i class="fas fa-code"></i> Skills</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea id="skills" class="form-control" placeholder="Skills (comma-separated)"></textarea>
+                                <div class="hint">Example: JavaScript, React, Node.js, Python, SQL</div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="panel"><div class="panel-header"><i class="fas fa-graduation-cap"></i> Education</div><div class="panel-body"><div class="form-group"><textarea id="education" class="form-control" placeholder="Education (School | Years | Grade | Location)"></textarea><div class="hint">Example: MIT | 2016-2020 | Bachelor of Science | Cambridge, MA</div></div></div></div>
+                    <div class="panel">
+                        <div class="panel-header"><i class="fas fa-graduation-cap"></i> Education</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea id="education" class="form-control" placeholder="Education (School | Years | Grade | Location)"></textarea>
+                                <div class="hint">Example: MIT | 2016-2020 | Bachelor of Science | Cambridge, MA</div>
+                            </div>
+                        </div>
+                    </div>
 
                     <button id="generateResume" class="btn btn-primary" style="width: 100%;">
                         <i class="fas fa-sync-alt"></i> Generate Resume

@@ -9,11 +9,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const notification = document.getElementById('notification');
     const resumeForm = document.getElementById('resumeForm');
     const resumeOutput = document.getElementById('resumeOutput');
+    const progressBar = document.querySelector('.progress-bar');
+    const panelHeaders = document.querySelectorAll('.panel-header');
 
     const formFields = [
         'name', 'email', 'phone', 'linkedin', 'github',
         'summary', 'experience', 'projects', 'certifications', 'skills', 'education'
     ];
+
+    // Add collapsible functionality to panels
+    panelHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const panelBody = this.nextElementSibling;
+            this.classList.toggle('collapsed');
+            panelBody.classList.toggle('collapsed');
+        });
+    });
+
+    // Update progress bar on scroll
+    window.addEventListener('scroll', updateProgressBar);
+
+    function updateProgressBar() {
+        const winHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset;
+        const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+        progressBar.style.width = scrollPercent + '%';
+    }
 
     themeToggle.addEventListener('click', toggleTheme);
     saveDataBtn.addEventListener('click', saveData);
@@ -155,7 +177,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>`;
         }
 
+        // Add fade-in animation to the resume preview
+        resumeOutput.style.opacity = '0';
         resumeOutput.innerHTML = output;
+        
+        setTimeout(() => {
+            resumeOutput.style.opacity = '1';
+        }, 10);
     }
 
     function processLines(text) {
@@ -172,6 +200,9 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        // Show loading state
+        downloadPDFBtn.classList.add('loading');
+        
         if (typeof html2pdf !== 'undefined') {
             const opt = {
                 margin: 10,
@@ -180,9 +211,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-            html2pdf().set(opt).from(resumeOutput).save();
+            
+            html2pdf().set(opt).from(resumeOutput).save().then(() => {
+                // Remove loading state
+                downloadPDFBtn.classList.remove('loading');
+                showNotification('PDF downloaded successfully!');
+            });
         } else {
             showNotification('PDF library not loaded. Please try printing instead.', 'warning');
+            downloadPDFBtn.classList.remove('loading');
         }
     }
 
@@ -212,7 +249,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function showNotification(msg, type = 'success') {
         notification.textContent = msg;
         notification.className = 'notification show';
-        notification.style.backgroundColor = (type === 'warning') ? '#ff9800' : 'var(--success)';
+        if (type === 'warning') {
+            notification.classList.add('warning');
+        } else {
+            notification.classList.remove('warning');
+        }
         setTimeout(() => {
             notification.classList.remove('show');
         }, 3000);
